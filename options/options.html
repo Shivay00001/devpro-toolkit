@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevPro Toolkit - Settings</title>
+    <link rel="stylesheet" href="options.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">DevPro Toolkit Settings</span>
+            </div>
+        </header>
+
+        <main class="settings-container">
+            <!-- General Settings -->
+            <section class="settings-section">
+                <h2>⚙️ General Settings</h2>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-name">Show notifications</span>
+                        <span class="setting-desc">Get notified when focus sessions end</span>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="notificationsEnabled" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-name">Auto-save sessions</span>
+                        <span class="setting-desc">Automatically save tabs before browser closes</span>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="autoSaveEnabled" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Focus Mode Settings -->
+            <section class="settings-section">
+                <h2>🎯 Focus Mode</h2>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-name">Work duration</span>
+                        <span class="setting-desc">Length of focus sessions in minutes</span>
+                    </div>
+                    <input type="number" id="pomodoroWork" value="25" min="1" max="120" class="number-input">
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-name">Break duration</span>
+                        <span class="setting-desc">Length of breaks in minutes</span>
+                    </div>
+                    <input type="number" id="pomodoroBreak" value="5" min="1" max="30" class="number-input">
+                </div>
+            </section>
+
+            <!-- Dark Mode Settings -->
+            <section class="settings-section">
+                <h2>🌙 Dark Mode</h2>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-name">Enable by default</span>
+                        <span class="setting-desc">Apply dark mode to all new tabs</span>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="darkModeDefault">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Data Management -->
+            <section class="settings-section">
+                <h2>💾 Data Management</h2>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-name">Export all data</span>
+                        <span class="setting-desc">Download your sessions, settings, and history</span>
+                    </div>
+                    <button class="btn btn-secondary" id="exportBtn">📦 Export</button>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-name">Import data</span>
+                        <span class="setting-desc">Restore from a previous export</span>
+                    </div>
+                    <button class="btn btn-secondary" id="importBtn">📥 Import</button>
+                    <input type="file" id="importFile" accept=".json" style="display: none;">
+                </div>
+                <div class="setting-item danger-zone">
+                    <div class="setting-info">
+                        <span class="setting-name">Clear all data</span>
+                        <span class="setting-desc">Delete all saved sessions, settings, and history</span>
+                    </div>
+                    <button class="btn btn-danger" id="clearBtn">🗑️ Clear All</button>
+                </div>
+            </section>
+
+            <!-- About -->
+            <section class="settings-section about">
+                <h2>ℹ️ About</h2>
+                <p><strong>DevPro Toolkit</strong> v1.0.0</p>
+                <p>All-in-one productivity extension for developers.</p>
+                <p class="credits">Made with ⚡ for maximum productivity</p>
+            </section>
+        </main>
+    </div>
+
+    <script src="options.js"></script>
+</body>
+
+</html>
