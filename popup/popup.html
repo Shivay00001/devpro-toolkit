@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=600, height=500">
+  <title>DevPro Toolkit</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">DevPro Toolkit</span>
+      </div>
+      <div class="header-right">
+        <div class="usage-badge" id="usageBadge" title="Daily usage">
+          <span id="usageText">Free</span>
+        </div>
+        <button class="settings-btn" id="settingsBtn" title="Settings">⚙️</button>
+      </div>
+    </header>
+
+    <!-- Upgrade Modal -->
+    <div class="upgrade-modal" id="upgradeModal">
+      <div class="upgrade-content">
+        <button class="upgrade-close" id="closeUpgrade">×</button>
+        <div class="upgrade-icon">🚀</div>
+        <h2>Upgrade to Premium</h2>
+        <p>You've hit your daily free limit!</p>
+
+        <div class="upgrade-features">
+          <div class="feature-item">✓ Unlimited tab saves</div>
+          <div class="feature-item">✓ Unlimited JSON formatting</div>
+          <div class="feature-item">✓ Unlimited REST requests</div>
+          <div class="feature-item">✓ Unlimited focus sessions</div>
+          <div class="feature-item">✓ Priority support</div>
+        </div>
+
+        <div class="upgrade-pricing">
+          <span class="price">₹99</span>
+          <span class="period">/month</span>
+        </div>
+
+        <button class="btn btn-whatsapp" id="upgradeBtn">
+          <span class="wa-icon">💬</span>
+          Contact on WhatsApp
+        </button>
+
+        <div class="key-section">
+          <p class="key-label">Already have a key?</p>
+          <div class="key-input-group">
+            <input type="text" id="premiumKeyInput" placeholder="DEVPRO-XXXX-XXXX-XXXX">
+            <button class="btn btn-primary" id="activateKeyBtn">Activate</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab Navigation -->
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="tabs">📑 Tabs</button>
+      <button class="tab" data-tab="json">{ } JSON</button>
+      <button class="tab" data-tab="dark">🌙 Dark</button>
+      <button class="tab" data-tab="focus">🎯 Focus</button>
+      <button class="tab" data-tab="rest">🔗 REST</button>
+      <button class="tab" data-tab="security">🔒 Secure</button>
+    </nav>
+
+    <!-- Tab Panels -->
+    <main class="panels">
+
+      <!-- Tabs Panel -->
+      <section class="panel active" id="tabs-panel">
+        <div class="panel-header">
+          <h2>Tab Manager</h2>
+          <div class="btn-group">
+            <button class="btn btn-primary" id="saveSessionBtn">💾 Save Session</button>
+            <button class="btn btn-secondary" id="collapseBtn">📥 Collapse All</button>
+          </div>
+        </div>
+        <input type="text" class="search-input" id="sessionSearch" placeholder="🔍 Search sessions...">
+        <div class="sessions-list" id="sessionsList">
+          <div class="empty-state">No saved sessions yet</div>
+        </div>
+      </section>
+
+      <!-- JSON Panel -->
+      <section class="panel" id="json-panel">
+        <div class="panel-header">
+          <h2>JSON Viewer</h2>
+          <div class="btn-group">
+            <button class="btn btn-primary" id="formatJsonBtn">Format</button>
+            <button class="btn btn-secondary" id="minifyJsonBtn">Minify</button>
+            <button class="btn btn-secondary" id="copyJsonBtn">📋 Copy</button>
+          </div>
+        </div>
+        <textarea class="json-input" id="jsonInput" placeholder="Paste your JSON here..."></textarea>
+        <div class="json-stats" id="jsonStats"></div>
+        <div class="json-output" id="jsonOutput"></div>
+      </section>
+
+      <!-- Dark Mode Panel -->
+      <section class="panel" id="dark-panel">
+        <div class="panel-header">
+          <h2>Dark Mode</h2>
+          <label class="toggle-switch">
+            <input type="checkbox" id="darkModeToggle">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="settings-group">
+          <label class="setting-label">
+            <span>Brightness</span>
+            <span id="brightnessValue">100%</span>
+          </label>
+          <input type="range" class="slider" id="brightnessSlider" min="50" max="150" value="100">
+        </div>
+        <div class="settings-group">
+          <label class="setting-label">
+            <span>Contrast</span>
+            <span id="contrastValue">100%</span>
+          </label>
+          <input type="range" class="slider" id="contrastSlider" min="50" max="150" value="100">
+        </div>
+        <div class="whitelist-section">
+          <h3>Whitelist <span class="badge" id="whitelistCount">0</span></h3>
+          <div class="input-group">
+            <input type="text" id="whitelistInput" placeholder="Add domain (e.g. google.com)">
+            <button class="btn btn-primary" id="addWhitelistBtn">+</button>
+          </div>
+          <ul class="whitelist" id="whitelistList"></ul>
+        </div>
+      </section>
+
+      <!-- Focus Mode Panel -->
+      <section class="panel" id="focus-panel">
+        <div class="panel-header">
+          <h2>Focus Mode</h2>
+        </div>
+        <div class="focus-timer" id="focusTimer">
+          <div class="timer-display" id="timerDisplay">25:00</div>
+          <div class="timer-status" id="timerStatus">Ready to focus</div>
+          <div class="btn-group">
+            <button class="btn btn-primary btn-large" id="startFocusBtn">▶ Start Focus</button>
+            <button class="btn btn-danger btn-large hidden" id="stopFocusBtn">⏹ Stop</button>
+          </div>
+        </div>
+        <div class="focus-stats" id="focusStats">
+          <div class="stat">
+            <span class="stat-value" id="sessionsCount">0</span>
+            <span class="stat-label">Sessions</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value" id="totalMinutes">0</span>
+            <span class="stat-label">Minutes</span>
+          </div>
+        </div>
+        <div class="blocked-sites-section">
+          <h3>Blocked Sites</h3>
+          <div class="input-group">
+            <input type="text" id="blockedSiteInput" placeholder="Add site to block...">
+            <button class="btn btn-primary" id="addBlockedBtn">+</button>
+          </div>
+          <ul class="blocked-list" id="blockedList"></ul>
+        </div>
+      </section>
+
+      <!-- REST Client Panel -->
+      <section class="panel" id="rest-panel">
+        <div class="panel-header">
+          <h2>REST Client</h2>
+        </div>
+        <div class="rest-form">
+          <div class="method-url-group">
+            <select class="method-select" id="restMethod">
+              <option value="GET">GET</option>
+              <option value="POST">POST</option>
+              <option value="PUT">PUT</option>
+              <option value="PATCH">PATCH</option>
+              <option value="DELETE">DELETE</option>
+            </select>
+            <input type="text" class="url-input" id="restUrl" placeholder="https://api.example.com/endpoint">
+            <button class="btn btn-primary" id="sendRequestBtn">Send</button>
+          </div>
+          <details class="rest-details">
+            <summary>Headers</summary>
+            <textarea class="headers-input" id="restHeaders" placeholder="Content-Type: application/json"></textarea>
+          </details>
+          <details class="rest-details">
+            <summary>Body</summary>
+            <textarea class="body-input" id="restBody" placeholder='{"key": "value"}'></textarea>
+          </details>
+        </div>
+        <div class="rest-response" id="restResponse">
+          <div class="response-meta hidden" id="responseMeta">
+            <span class="status-badge" id="responseStatus"></span>
+            <span class="response-time" id="responseTime"></span>
+            <span class="response-size" id="responseSize"></span>
+          </div>
+          <pre class="response-body" id="responseBody">Response will appear here...</pre>
+        </div>
+      </section>
+
+      <!-- Security Panel -->
+      <section class="panel" id="security-panel">
+        <div class="panel-header">
+          <h2>Security Check</h2>
+          <button class="btn btn-secondary" id="refreshSecurityBtn">🔄 Refresh</button>
+        </div>
+        <div class="security-score" id="securityScore">
+          <div class="score-circle">
+            <span class="score-value" id="scoreValue">--</span>
+          </div>
+          <div class="score-label" id="scoreLabel">Analyzing...</div>
+        </div>
+        <div class="security-details" id="securityDetails">
+          <div class="security-item">
+            <span class="security-icon" id="httpsIcon">🔓</span>
+            <span class="security-text" id="httpsText">Checking HTTPS...</span>
+          </div>
+          <div class="security-item">
+            <span class="security-icon">🌐</span>
+            <span class="security-text" id="domainText">--</span>
+          </div>
+        </div>
+        <div class="security-tips" id="securityTips"></div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="../lib/storage.js"></script>
+  <script src="../modules/json-viewer.js"></script>
+  <script src="../modules/premium.js"></script>
+  <script src="popup.js"></script>
+</body>
+
+
+</html>
