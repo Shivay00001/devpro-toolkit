@@ -1,50 +1,36 @@
-# Devpro Toolkit
+# DevPro Toolkit
 
-DevPro Toolkit — all-in-one browser extension for developers
+A Manifest V3 Chrome extension: an all-in-one developer productivity toolkit.
 
-![Language](https://img.shields.io/badge/Language-JavaScript-blue)
-![Status](https://img.shields.io/badge/Status-Active-success)
-![License](https://img.shields.io/badge/License-MIT-green)
+## What it actually does
 
-## 🚀 Overview
+- **Tab Manager** (`modules/tab-manager.js`) — group/organize tabs from the popup.
+- **Dark Mode** (`modules/dark-mode.js`, `content/dark-mode.css`, `content/content.js`) — force dark styling on pages via injected CSS.
+- **Focus Mode** (`modules/focus-mode.js`) — blocklist of distracting URLs; the service worker redirects blocked tabs to `blocked/blocked.html`.
+- **JSON Viewer** (`modules/json-viewer.js`) — pretty-print/format JSON from the popup.
+- **REST Client** (`modules/rest-client.js`) — simple request builder in the popup.
+- **Security Tools** (`modules/security.js`) — client-side helpers (e.g. header inspection).
+- **Premium gate** (`modules/premium.js`) — usage tracking + upgrade modal; client-side only, no real payment backend.
 
-Welcome to the **Devpro Toolkit** repository. This project is built to deliver a robust and scalable solution tailored to modern development standards.
+Settings persist with `chrome.storage` (`lib/storage.js`); an options page lives at `options/options.html`.
 
-## ✨ Features
+## Install (unpacked, developer mode)
 
-- **High Performance:** Optimized for speed and efficiency.
-- **Scalable Architecture:** Designed to grow with your needs.
-- **Clean Codebase:** Follows best practices and industry standards.
-- **Secure by Default:** Engineered with security in mind.
+1. Open `chrome://extensions` and enable **Developer mode**.
+2. Click **Load unpacked** and select this folder.
+3. The ⚡ icon opens the popup.
 
-## 🛠️ Prerequisites
+## Package a zip (for Chrome Web Store or sideloading)
 
-Ensure you have the following installed in your environment before proceeding:
-- Appropriate runtime/compiler for `JavaScript`
-- Standard development tools
+```bash
+./package.sh      # creates devpro-toolkit.zip
+```
 
-## 📦 Installation
+Or manually: `zip -r devpro-toolkit.zip manifest.json icons background content lib modules options popup blocked -x '*.git*'`.
 
-Follow standard installation steps for `JavaScript` to set up the project locally:
+## Status & limits
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Shivay00001/devpro-toolkit.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd devpro-toolkit
-   ```
-3. Install dependencies according to the standard `JavaScript` ecosystem.
-
-## 💻 Usage
-
-Run the project using standard execution commands for `JavaScript`. Ensure all environment variables and configurations are set prior to execution.
-
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
-
-## 📝 License
-
-This project is licensed under standard terms.
+- Manifest V3, JSON valid, all referenced files present, all JS files pass `node --check`.
+- The `premium` module is a client-side placeholder — there is no payment backend; the "upgrade" flow is cosmetic.
+- The extension requests `<all_urls>` host permission (needed for dark-mode injection and the REST client). In a published build this should be narrowed or the affected features moved behind `activeTab`.
+- Not published to the Chrome Web Store; loaded unpacked only.
