@@ -1,5 +1,7 @@
 # DevPro Toolkit
 
+Built by [VisionQuantech](https://visionquantech.com) — AI agents, apps & tools for small businesses.
+
 A Manifest V3 Chrome extension: an all-in-one developer productivity toolkit.
 
 ## What it actually does
